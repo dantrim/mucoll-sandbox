@@ -1,0 +1,3 @@
+[submodule "ProductionConfig"]
+	path = ProductionConfig
+	url = git@github.com:dantrim/ProductionConfig.git
