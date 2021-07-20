@@ -38,7 +38,7 @@
     <!-- Primary and Secondary vertex finder ================================================ -->
     <processor name="VertexFinder" type="LcfiplusProcessor">
       <!-- run primary and secondary vertex finders -->
-      <parameter name="PFOCollection" type="string" value="PFOsFromJets" />
+      <parameter name="PFOCollection" type="string" value="PandoraPFOs" />
       <parameter name="PrimaryVertexCollectionName" type="string" value="PrimaryVertices" />
       <parameter name="PrimaryVertexFinder.BeamspotConstraint" type="bool">1 </parameter>
     </processor>

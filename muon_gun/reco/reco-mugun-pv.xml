@@ -44,22 +44,23 @@
     <processor name="Refit" />
 
     <!-- ========== Calo.xml (PandoraPFO algorithm) ============ -->
-    <processor name="MyDDCaloDigi"/>
-    <processor name="MyDDSimpleMuonDigi"/>
+    <!--<processor name="MyDDCaloDigi"/> -->
+    <!-- <processor name="MyDDSimpleMuonDigi"/> -->
     <processor name="MyDDMarlinPandora"/>
-    <group name="MergeCollections" />
+        <!-- <processor name="PFANoCalo"/> -->
+            <group name="MergeCollections" />
 
-    <if condition="Config.OverlayFalse">
-        <processor name="RenameCollection"/>
-    </if>
+        <!-- <if condition="Config.OverlayFalse"> -->
+                <processor name="RenameCollection"/> 
+            <!-- </if> -->
 
     <!-- ========== Monitoring.xml  ========== -->
-    <processor name="MyClicEfficiencyCalculator"/>
-    <processor name="MyRecoMCTruthLinker"/>
-    <processor name="MyTrackChecker"/>
+            <!-- <processor name="MyClicEfficiencyCalculator"/> -->
+         <processor name="MyRecoMCTruthLinker"/> 
+            <!-- <processor name="MyTrackChecker"/> -->
 
     <!-- =============== PFOSelector.xml ================= -->
-    <group name="PfoSelector" />
+        <!-- <group name="PfoSelector" /> -->
 
     <!-- =============== VertexJet.xml ================== -->
         <!--  <processor name="MyFastJetProcessor"/> -->
@@ -88,7 +89,9 @@
 <include ref="config_files/TrackerDigitization.xml"/>
 <include ref="config_files/Tracking.xml"/>
 <include ref="config_files/Calo.xml"/>
+        <!--<include ref="config_files/MarlinPandoraPFA.xml"/>  -->
 <include ref="config_files/Monitoring.xml"/>
+    <!-- <include ref="config_files/Monitoring_noCalo.xml"/> -->
 <include ref="config_files/PFOSelector.xml"/>
 <include ref="config_files/PVReco.xml"/>
 

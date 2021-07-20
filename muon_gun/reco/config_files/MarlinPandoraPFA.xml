@@ -5,7 +5,7 @@
     <parameter name="Histograms" type="int">0 </parameter>
     <parameter name="RootFile" type="string">Digi_SiW.root</parameter>
     <!--CaloHit Relation Collection-->
-    <parameter name="RelationOutputCollection" type="string" lcioOutType="LCRelation">RelationCaloHit </parameter>
+    <parameter name="RelationOutputCollection" type="string" lcioOutType="LCRelation"> </parameter>
     <!--energy required to create e-h pair in silicon (in eV)-->
     <parameter name="energyPerEHpair" type="float">3.6 </parameter>
     <!--verbosity level of this processor ("DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT")-->
@@ -14,7 +14,7 @@
     <!-- ECAL -->
 
     <!--ECAL Collection Names-->
-    <parameter name="ECALCollections" type="StringVec" lcioInType="SimCalorimeterHit">ECalBarrelCollection ECalEndcapCollection ECalPlugCollection </parameter>
+    <parameter name="ECALCollections" type="StringVec" lcioInType="SimCalorimeterHit"></parameter>
     <!--ECAL Collection of real Hits-->
     <parameter name="ECALOutputCollection0" type="string" lcioOutType="CalorimeterHit">ECALBarrel </parameter>
     <!--ECAL Collection of real Hits-->
@@ -96,7 +96,7 @@
     <!-- HCAL -->
 
     <!--HCAL Collection Names-->
-    <parameter name="HCALCollections" type="StringVec" lcioInType="SimCalorimeterHit">HCalBarrelCollection HCalEndcapCollection HCalRingCollection </parameter>
+    <parameter name="HCALCollections" type="StringVec" lcioInType="SimCalorimeterHit"> </parameter>
     <!--HCAL Collection of real Hits-->
     <parameter name="HCALOutputCollection0" type="string" lcioOutType="CalorimeterHit">HCALBarrel </parameter>
     <!--HCAL Collection of real Hits-->
@@ -181,11 +181,11 @@
     <parameter name="MaxClusterEnergyToApplySoftComp" type="float">2000.</parameter>
     <!-- Collection names -->
     <parameter name="TrackCollections" type="StringVec"> SiTracks_Refitted </parameter>
-    <parameter name="ECalCaloHitCollections" type="StringVec"></parameter>
-    <parameter name="HCalCaloHitCollections" type="StringVec"></parameter>
-    <parameter name="MuonCaloHitCollections" type="StringVec"></parameter>
+    <parameter name="ECalCaloHitCollections" type="StringVec">ECALBarrel ECALEndcap ECALOther</parameter>
+    <parameter name="HCalCaloHitCollections" type="StringVec">HCALBarrel HCALEndcap HCALOther</parameter>
+    <parameter name="MuonCaloHitCollections" type="StringVec">MUON</parameter>
     <parameter name="MCParticleCollections" type="StringVec">MCParticle</parameter>
-    <parameter name="RelCaloHitCollections" type="StringVec"></parameter>
+    <parameter name="RelCaloHitCollections" type="StringVec">RelationCaloHit RelationMuonHit</parameter>
     <parameter name="RelTrackCollections" type="StringVec"> SiTracks_Refitted_Relation </parameter>
     <parameter name="KinkVertexCollections" type="StringVec">KinkVertices</parameter>
     <parameter name="ProngVertexCollections" type="StringVec">ProngVertices</parameter>
