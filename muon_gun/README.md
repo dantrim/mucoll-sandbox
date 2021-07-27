@@ -18,6 +18,7 @@ gun sample, simulating it's interaction with the detector, reconstructing
 the final state, and producing an output LCTuple ROOT file:
 
 ```
+(docker) $ cd /workdir
 (docker) $ python /mucoll_config/generation/muon-gun-simple.py
 (docker) $ ddsim --steeringFile=/mucoll_config/simulation/muon_gun_sim_steer.py --inputFiles="muonGun_gen.slcio" --outputFile="muonGun_sim.slcio" --numberOfEvents=100
 (docker) $ Marlin --global.LCIOInputFiles="muonGun_sim.slcio" --Output_REC.LCIOOutputFile="muonGun_reco.slcio" --global.MaxRecordNumber=100 /mucoll_config/reconstruction/reco-mugun-pv-nocalo.xml
