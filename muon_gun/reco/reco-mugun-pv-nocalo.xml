@@ -44,14 +44,14 @@
     <processor name="Refit" />
 
     <!-- ========== Calo.xml (PandoraPFO algorithm) ============ -->
-    <processor name="MyDDCaloDigi"/>
-    <processor name="MyDDSimpleMuonDigi"/>
-    <processor name="MyDDMarlinPandora"/>
-    <group name="MergeCollections" />
+        <!--<processor name="MyDDCaloDigi"/> -->
+        <!--<processor name="MyDDSimpleMuonDigi"/> -->
+        <!--<processor name="MyDDMarlinPandora"/> -->
+            <!--<group name="MergeCollections" /> -->
 
-    <if condition="Config.OverlayFalse">
-        <processor name="RenameCollection"/>
-    </if>
+                <!--<if condition="Config.OverlayFalse"> -->
+                <!--    <processor name="RenameCollection"/> -->
+                    <!--</if> -->
 
     <!-- ========== Monitoring.xml  ========== -->
     <processor name="MyClicEfficiencyCalculator"/>
@@ -63,7 +63,7 @@
 
     <!-- =============== VertexJet.xml ================== -->
         <!--  <processor name="MyFastJetProcessor"/> -->
-            <!--<processor name="TrackToPFOConversion" /> -->
+    <processor name="TrackToPFOConversion" />
     <group name="PVReco" />
 
     <!-- ========== output  ========== -->
@@ -73,7 +73,7 @@
 
   <global>
     <parameter name="LCIOInputFiles">
-        muonGun_sim.slcio
+    muonGun_sim.slcio
     </parameter>
     <!-- Limit the number of processed records (run+evt): -->
     <parameter name="MaxRecordNumber" value="1000" />
@@ -89,9 +89,9 @@
 <include ref="config_files/DigiOverlay.xml"/>
 <include ref="config_files/TrackerDigitization.xml"/>
 <include ref="config_files/Tracking.xml"/>
-<include ref="config_files/Calo.xml"/>
+    <!--<include ref="config_files/Calo.xml"/> -->
 <include ref="config_files/Monitoring.xml"/>
-<include ref="config_files/PFOSelector.xml"/>
+    <!--<include ref="config_files/PFOSelector.xml"/> -->
 <include ref="config_files/PVReco.xml"/>
 
   <processor name="Config" type="CLICRecoConfig" >
@@ -128,7 +128,7 @@
 
   <processor name="Output_REC" type="LCIOOutputProcessor">
     <!--   standard output: full reconstruction keep all collections -->
-    <parameter name="LCIOOutputFile" type="string"> muonGun_reco.slcio </parameter>
+    <parameter name="LCIOOutputFile" type="string"> muonGun_reco.slcio </parameter> -->
     <parameter name="FullSubsetCollections" type="StringVec"> EfficientMCParticles InefficientMCParticles </parameter>
     <parameter name="LCIOWriteMode" type="string" value="None"/>
     <parameter name="SplitFileSizekB" type="int">996147 </parameter> 
@@ -138,39 +138,3 @@
     <parameter name="KeepCollectionNames" type="StringVec">  </parameter>
   </processor>
 </marlin>
-
-  <processor name="FilterDL_VXDB" type="FilterDoubleLayerHits">
-    <parameter name="FillHistograms" type="bool" value="true" />
-    <parameter name="SubDetectorName" type="string" value="Vertex" />
-    <!-- Name of the input hit collection -->
-    <parameter name="InputCollection" type="string" value="VBTrackerHits" />
-    <!-- Name of the output filtered hit collection -->
-    <parameter name="OutputCollection" type="string" value="VBTrackerHits_DLFiltered" />
-    <!-- Configuration of the maximum dX and dTheta between a pair of hits at the inner and outer layer -->
-    <!-- 4 numbers per double-layer: <inner layer ID>  <outer layer ID>  <dX max [mm]>  <dTheta max [mrad]> -->
-    <parameter name="DoubleLayerCuts" type="StringVec">
-      0 1 1.0 0.6
-      2 3 1.0 0.33
-      4 5 1.0 0.27
-      6 7 1.0 0.21
-    </parameter>
-    <parameter name="Verbosity" type="string"> DEBUG5 </parameter>
-  </processor>
-
-  <processor name="FilterDL_VXDE" type="FilterDoubleLayerHits">
-    <parameter name="FillHistograms" type="bool" value="true" />
-    <parameter name="SubDetectorName" type="string" value="Vertex" />
-    <!-- Name of the input hit collection -->
-    <parameter name="InputCollection" type="string" value="VETrackerHits" />
-    <!-- Name of the output filtered hit collection -->
-    <parameter name="OutputCollection" type="string" value="VETrackerHits_DLFiltered" />
-    <!-- Configuration of the maximum dX and dTheta between a pair of hits at the inner and outer layer -->
-    <!-- 4 numbers per double-layer: <inner layer ID>  <outer layer ID>  <dX max [mm]>  <dTheta max [mrad]> -->
-    <parameter name="DoubleLayerCuts" type="StringVec">
-      0 1 1.0 0.21
-      2 3 1.0 0.18
-      4 5 0.8 0.12
-      6 7 0.6 0.12
-    </parameter>
-    <parameter name="Verbosity" type="string"> DEBUG5 </parameter>
-  </processor>

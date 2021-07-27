@@ -7,6 +7,11 @@
     <parameter name="OutputCollection" type="string"> PFOsFromJets </parameter>
   </processor>
 
+  <processor name="TrackToPFOConversion" type="TrackToRecoParticleConverter">
+    <parameter name="InputTrackCollection" type="string"> SiTracks_Refitted </parameter>
+    <parameter name="OutputPFOCollection" type="string"> TrackPFOs </parameter>
+  </processor>
+
   <group name="PVReco">
     <parameter name="Algorithms" type="stringVec"> PrimaryVertexFinder</parameter>
     <parameter name="ReadSubdetectorEnergies" type="int" value="0"/> <!-- true for ILD -->
@@ -18,7 +23,7 @@
     <parameter name="MCPCollection" type="string" value="MCParticle" />
     <parameter name="MCPFORelation" type="string" value="RecoMCTruthLink" />
     <parameter name="MagneticField" type="float" value="4.0"/> <!-- CLIC B field -->
-    <parameter name="BeamSizeX" type="float" value="40.E-6"/> <!-- CLIC beam sizes from CDR -->
+    <parameter name="BeamSizeX" type="float" value="40.0E-6"/> <!-- CLIC beam sizes from CDR -->
     <parameter name="BeamSizeY" type="float" value="1.0E-6"/>
     <parameter name="BeamSizeZ" type="float" value="44E-3"/>
     <!-- parameters for primary vertex finder -->
@@ -38,9 +43,9 @@
     <!-- Primary and Secondary vertex finder ================================================ -->
     <processor name="VertexFinder" type="LcfiplusProcessor">
       <!-- run primary and secondary vertex finders -->
-      <parameter name="PFOCollection" type="string" value="PFOsFromJets" />
+      <parameter name="PFOCollection" type="string" value="TrackPFOs" />
       <parameter name="PrimaryVertexCollectionName" type="string" value="PrimaryVertices" />
-      <parameter name="PrimaryVertexFinder.BeamspotConstraint" type="bool">1 </parameter>
+      <parameter name="PrimaryVertexFinder.BeamspotConstraint" type="bool">true </parameter>
     </processor>
 
     <!-- Primary and Secondary vertex finder for resolutions ================================= -->

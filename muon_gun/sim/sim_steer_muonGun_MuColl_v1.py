@@ -5,27 +5,22 @@ from g4units import mm, GeV, MeV, m, deg
 SIM = DD4hepSimulation()
 
 ## The compact XML file
-#SIM.compactFile = "/opt/ilcsoft/muonc/detector-simulation/geometries/MuColl_v1/MuColl_v1.xml"
-#SIM.compactFile = "/workdir/mucoll-sandbox/muon_gun/sim/detector-simulation/geometries/MuColl_v1/MuColl_v1.xml"
-SIM.compactFile = "/workdir/mucoll-sandbox/muon_gun/sim/detector-simulation/geometries/MuColl_v1_noCalo/MuColl_v1.xml"
+#SIM.compactFile = "${PROJECT_SOURCE_DIR}/data/MuColl_v1_mod0/MuColl_v1_mod0.xml"
+SIM.compactFile = "${ILCSOFT}/muonc/detector-simulation/geometries/MuColl_v1/MuColl_v1.xml"
 ## Lorentz boost for the crossing angle, in radian!
 SIM.crossingAngleBoost = 0.
 SIM.enableDetailedShowerMode = True
 SIM.enableG4GPS = False
 SIM.enableG4Gun = False
-SIM.enableGun = False
+SIM.enableGun = True
 ## InputFiles for simulation .stdhep, .slcio, .HEPEvt, .hepevt, .hepmc files are supported
-#SIM.inputFiles = ["muonGun_gen.slcio"]
-SIM.inputFiles = ["mumu2H2bb750.stdhep"]
-## HepMC reader v3 is not supported
-SIM.hepmc3.useHepMC3 = False
+SIM.inputFiles = []
 ## Macro file to execute for runType 'run' or 'vis'
 SIM.macroFile = []
 ## number of events to simulate, used in batch mode
 SIM.numberOfEvents = 1000
 ## Outputfile from the simulation,only lcio output is supported
-#SIM.outputFile = "muonGun_sim.slcio"
-SIM.outputFile = "mumu2H2bb750_sim.slcio"
+SIM.outputFile = "muonGun_sim.slcio"
 ## Verbosity use integers from 1(most) to 7(least) verbose
 ## or strings: VERBOSE, DEBUG, INFO, WARNING, ERROR, FATAL, ALWAYS
 SIM.printLevel = 3
@@ -153,7 +148,7 @@ SIM.gun.energy = 10.0*GeV
 ##     if one of these options is not None the random distribution will be set to True and cannot be turned off!
 ##     
 SIM.gun.isotrop = True
-SIM.gun.multiplicity = 10
+SIM.gun.multiplicity = 1
 SIM.gun.particle = "mu-"
 SIM.gun.phiMax = None
 
@@ -162,8 +157,8 @@ SIM.gun.phiMin = None
 
 ##  position of the particle gun, 3 vector 
 SIM.gun.position = (0.0, 0.0, 0.0)
-SIM.gun.thetaMax = 172*deg
-SIM.gun.thetaMin = 8*deg
+SIM.gun.thetaMax = 160*deg
+SIM.gun.thetaMin = 20*deg
 
 
 ################################################################################
@@ -237,11 +232,10 @@ SIM.physics.rejectPDGs = {1,2,3,4,5,6,21,23,24,25}
 
 ## If True, calculate random seed for each event based on eventID and runID
 ## allows reproducibility even when SkippingEvents
-SIM.random.enableEventSeed = True
+SIM.random.enableEventSeed = False
 SIM.random.file = None
 SIM.random.luxury = 1
 SIM.random.replace_gRandom = True
 SIM.random.seed = None
 SIM.random.type = None
-
 

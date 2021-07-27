@@ -159,4 +159,3 @@
     <!--Final minimum number of track clusters-->
     <parameter name="MinClustersOnTrackAfterFit" type="int">3 </parameter>
   </processor>
-
