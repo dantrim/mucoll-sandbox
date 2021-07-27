@@ -173,6 +173,7 @@ dmypy.json
 
 # misc
 *.app/
+*.DS_Store
 
 # rust
 *target/
