@@ -1,13 +1,23 @@
 # mucoll-sandbox
 
 ## Cloning the `mucoll-sandbox` repository
-You must perform a recursive clone of this repository if you wish to also
+
+If you wish to use the configuration files from
+this repository you must perform a recursive clone of this repository in order to
 pull all of the configuration files from the [ProductionConfig](ProductionConfig/)
 directory:
 
 ```
 git clone --recursive https://github.com/dantrim/mucoll-sandbox.git
 ```
+
+If you wish to use your own configuration files, you can simply do the usual clone:
+
+```
+git clone https://github.com/dantrim/mucoll-sandbox.git
+```
+
+
 
 ## Setup
 
