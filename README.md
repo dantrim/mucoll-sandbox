@@ -1,6 +1,6 @@
 # mucoll-sandbox
 
-## Clonging the `mucoll-sandbox` repository
+## Cloning the `mucoll-sandbox` repository
 You must perform a recursive clone of this repository if you wish to also
 pull all of the configuration files from the [ProductionConfig](ProductionConfig/)
 directory:
