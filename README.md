@@ -18,7 +18,7 @@ ProductionConfig/
 
 ### Setting up your environment
 
-In order to to perform muon collider studies, it is assumed that
+In order to perform muon collider studies, it is assumed that
 you will be using the muon collider Docker containers.
 See [Pulling Muon Collider Docker Images](#pulling-muon-collider-docker-images)
 if you do not have them already on your machine.
