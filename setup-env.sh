@@ -2,7 +2,7 @@
 
 image="infnpd/mucoll-ilc-framework"
 image_tag="1.5-centos8"
-default_config_dirname="mucoll_config"
+default_config_dirname="ProductionConfig"
 default_config_path="${PWD}/../${default_config_dirname}"
 default_workdir="${PWD}"
 
@@ -72,7 +72,7 @@ function main {
     config_path=$(cd ${config_path}; pwd)
     workdir_path=$(cd ${workdir_path}; pwd)
 
-    cmd="docker run --rm -ti -v ${workdir_path}:/workdir -v ${config_path}:/mucoll_config/ ${image}:${image_tag}"
+    cmd="docker run --rm -ti -v ${workdir_path}:/workdir -v ${config_path}:/ProductionConfig/ ${image}:${image_tag}"
     echo "Running: ${cmd}"
     $cmd
 }
