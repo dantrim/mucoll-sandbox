@@ -1,8 +1,0 @@
-cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
-project(root-test)
-find_package(ROOT 6.22 CONFIG REQUIRED)
-message("ROOT_USE_FILE = ${ROOT_USE_FILE}")
-message("ROOT LIBRS = ${ROOT_LIBRARIES}")
-include("${ROOT_USE_FILE}")
-add_executable(root-example root_example.cpp)
-target_link_libraries(root-example PUBLIC ${ROOT_LIBRARIES} ${ROOT_EXE_LINKER_FLAGS})
