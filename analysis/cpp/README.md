@@ -1,8 +1,10 @@
 # Simple Plotting and Event Looping over LCTuple
 
 ## Compilation Instructions
-Compile following the usual CMake steps:
+Compile following the usual CMake steps. First go to the directory where the [CMakeLists.txt](CMakeLists.txt) file is located,
+create and move to a build directory, and call `cmake ..` + `make`:
 ```
+cd /path/to/mucoll-sandbox/analysis/cpp
 mkdir build
 cd build
 cmake ..
@@ -15,7 +17,8 @@ The former specifies histograms using a simple C++ struct `HistoConfig` and an `
 variables can be plotted. The latter performs an event loop over the events contained
 in the LCTuple ROOT file and fills histograms at each event.
 
-After [compiling](#compilation-instructions), the executables `make-histograms` and `make-histograms-loop` will be available.
+After [compiling](#compilation-instructions), the executables `make-histograms` and `make-histograms-loop` will be available
+in the build directory.
 Providing the `-h` command line option will print out the usage,
 
 ```
