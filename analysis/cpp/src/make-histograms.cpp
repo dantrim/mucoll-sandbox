@@ -33,7 +33,9 @@ std::map<std::string, HistoConfig> plot_vars {
     {"vtxxx", {/*x-label*/"PV x-position [#mum]", /*y-label*/"Entries/bin", /*bin-width*/0.2, /*left edge of histogram*/-5, /*right edge*/5, /*multiplier for the variable*/1.0e6}},
     {"vtyyy", {"PV y-position [#mum]", "Entries/bin", 0.2, -5, 5, 1.0e6}},
     {"vtzzz", {"PV z-position [mm]", "Entries/bin", 0.5, -12, 12, 1.0e3}},
-    {"mcpdg", {"MC particle PDG id.", "Entries/bin", 1.0, -25, 25, 1.0}},
+    {"mcpdg", {"MC particle PDG id.", "Entries/bin", 1.0, -30, 30, 1.0}},
+    {"mcvtx", {"MC x-position [#mum]", "Entries/bin", 0.2, -5, 5, 1.0e6}}  //new
+    {"vtxxx-mcvtx", {"MC x-position [#mum]", "Entries/bin", 0.2, -5, 5, 1.0e6}}  //new
 };
 
 ////////////////////////////////////////////////////////
@@ -64,7 +66,7 @@ void print_usage(char* argv[]) {
 int main(int argc, char* argv[]) {
 
     // take in the command line arguments
-    std::string input_file{""};
+    std::string input_file{"muonGun_lctuple.root"};
     std::string tree_name{"MyLCTuple"};
     std::string selected_cut{"none"};
     std::string selected_variable{""};
@@ -136,6 +138,9 @@ int main(int argc, char* argv[]) {
             size_t n_bins = (histo_config.right_edge - histo_config.left_edge) / histo_config.bin_width;
             draw_cmd << "(" << n_bins << "," << histo_config.left_edge << "," <<  histo_config.right_edge << ")";
         }
+        std::cout << draw_cmd.str() << std::endl;
+        std::cout << cut_map.at(selected_cut) << std::endl;
+
 
         // fill the histogram
         tree->Draw(draw_cmd.str().c_str(), cut_map.at(selected_cut).c_str(), "HIST");

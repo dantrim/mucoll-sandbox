@@ -33,7 +33,7 @@ void print_usage(char* argv[]) {
 int main(int argc, char* argv[]) {
 
     // take in the command line arguments
-    std::string input_file{""};
+    std::string input_file{"muonGun_lctuple.root"};
     std::string tree_name{"MyLCTuple"};
     bool do_logy{false};
 
@@ -69,30 +69,37 @@ int main(int argc, char* argv[]) {
     int* mcpdg = new int[5000000]; // ROOT is dumb so just allocate a ton of memory for these arrays
     float* mc_px = new float[5000000];
     float* mc_py = new float[5000000];
+    float* mc_xpos = 0;
     int n_mc_particles_in_event;
 
     // attach the local variables to those in the TTree
     tree->SetBranchAddress("vtxxx", &pv_xpos);
-    tree->SetBranchAddress("vtyyy", &pv_ypos);
-    tree->SetBranchAddress("vtzzz", &pv_zpos);
-    tree->SetBranchAddress("mcpdg", mcpdg);
-    tree->SetBranchAddress("nmcp", &n_mc_particles_in_event);
-    tree->SetBranchAddress("mcmox", mc_px);
-    tree->SetBranchAddress("mcmoy", mc_py);
+    tree->SetBranchAddress("mcvtx", &pv_xpos);
+    // tree->SetBranchAddress("vtyyy", &pv_ypos);
+    // tree->SetBranchAddress("vtzzz", &pv_zpos);
+    // tree->SetBranchAddress("mcpdg", mcpdg);
+    // tree->SetBranchAddress("nmcp", &n_mc_particles_in_event);
+    // tree->SetBranchAddress("mcmox", mc_px);
+    // tree->SetBranchAddress("mcmoy", mc_py);
 
     // instantiate the histograms that we want to make
     std::unique_ptr<TH1F> h_vtxxx = std::make_unique<TH1F>("h_vtxxx", "Reco PV x-position;PV x-position [#mum];Entries/bin", 50, -5, 5);
     std::unique_ptr<TCanvas> c_vtxxx = std::make_unique<TCanvas>("c_vtxxx");
-    std::unique_ptr<TH1F> h_vtyyy = std::make_unique<TH1F>("h_vtyyy", "Reco PV y-position;PV y-position [#mum];Entries/bin", 50, -5, 5);
-    std::unique_ptr<TCanvas> c_vtyyy = std::make_unique<TCanvas>("c_vtyyy");
-    std::unique_ptr<TH1F> h_vtzzz = std::make_unique<TH1F>("h_vtzzz", "Reco PV z-position;PV z-position [mm];Entries/bin", 50, -10, 10);
-    std::unique_ptr<TCanvas> c_vtzzz = std::make_unique<TCanvas>("c_vtzzz");
-    std::unique_ptr<TH1F> h_mcpdg = std::make_unique<TH1F>("h_mcpdg", "MC PDG Id.;PDG Id.;Entries/bin", 50, -25, 25);
-    std::unique_ptr<TCanvas> c_mcpdg = std::make_unique<TCanvas>("c_mcpdg");
+    std::unique_ptr<TH1F> h_mcvtx = std::make_unique<TH1F>("h_mcvtx", "MC PDG Id.;PDG Id.;Entries/bin", 50, -5, 5);
+    std::unique_ptr<TCanvas> c_mcvtx = std::make_unique<TCanvas>("c_mcvtx");
 
-    // histograms filled for those particles with pT > 1.0 GeV
-    std::unique_ptr<TH1F> h_mcpdg_ptcut = std::make_unique<TH1F>("h_mcpdg_ptcut", "MC PDG Id. (particles with pT > 1.0 GeV);PDG Id.;Entries/bin", 50, -25, 25);
-    std::unique_ptr<TCanvas> c_mcpdg_ptcut = std::make_unique<TCanvas>("c_mcpdg_ptcut");
+    // std::unique_ptr<TH1F> h_vtyyy = std::make_unique<TH1F>("h_vtyyy", "Reco PV y-position;PV y-position [#mum];Entries/bin", 50, -5, 5);
+    // std::unique_ptr<TCanvas> c_vtyyy = std::make_unique<TCanvas>("c_vtyyy");
+    // std::unique_ptr<TH1F> h_vtzzz = std::make_unique<TH1F>("h_vtzzz", "Reco PV z-position;PV z-position [mm];Entries/bin", 50, -10, 10);
+    // std::unique_ptr<TCanvas> c_vtzzz = std::make_unique<TCanvas>("c_vtzzz");
+    // std::unique_ptr<TH1F> h_mcpdg = std::make_unique<TH1F>("h_mcpdg", "MC PDG Id.;PDG Id.;Entries/bin", 50, -30, 30);
+    // std::unique_ptr<TCanvas> c_mcpdg = std::make_unique<TCanvas>("c_mcpdg");
+    
+
+
+    // // histograms filled for those particles with pT > 1.0 GeV
+    // std::unique_ptr<TH1F> h_mcpdg_ptcut = std::make_unique<TH1F>("h_mcpdg_ptcut", "MC PDG Id. (particles with pT > 1.0 GeV);PDG Id.;Entries/bin", 40, -20, 20);
+    // std::unique_ptr<TCanvas> c_mcpdg_ptcut = std::make_unique<TCanvas>("c_mcpdg_ptcut");
 
     // loop over the events in the TTree and fill the histograms
     for(int ievent = 0; ievent < tree->GetEntries(); ++ievent) {
@@ -103,26 +110,27 @@ int main(int argc, char* argv[]) {
         tree->GetEntry(ievent);
 
         h_vtxxx->Fill(pv_xpos * 1e6);
-        h_vtyyy->Fill(pv_ypos * 1e6);
-        h_vtzzz->Fill(pv_zpos * 1e3);
+        //h_mcvtx->Fill(pv_xpos * 1e6);
+        // h_vtyyy->Fill(pv_ypos * 1e6);
+        // h_vtzzz->Fill(pv_zpos * 1e3);
 
         // loop over the MC particles
-        for(size_t iparticle = 0; iparticle < n_mc_particles_in_event; ++iparticle) {
-            int pdgid = mcpdg[iparticle];
+        // for(size_t iparticle = 0; iparticle < n_mc_particles_in_event; ++iparticle) {
+        //     int pdgid = mcpdg[iparticle];
 
-            // skip things we don't care about
-            if(std::abs(pdgid) > 2000) continue;
+        //     // skip things we don't care about
+        //     if(std::abs(pdgid) > 2000) continue;
 
-            h_mcpdg->Fill(pdgid);
+        //     h_mcpdg->Fill(pdgid);
 
-            // MC particle momentum of this particle
-            double px = mc_px[iparticle];
-            double py = mc_px[iparticle];
-            double transverse_momentum = sqrt(px*px + py*py); // GeV
-            if(transverse_momentum > 1.0) {
-                h_mcpdg_ptcut->Fill(pdgid);
-            }
-        } // loop over iparticle
+        //     // MC particle momentum of this particle
+        //     double px = mc_px[iparticle];
+        //     double py = mc_px[iparticle];
+        //     double transverse_momentum = sqrt(px*px + py*py); // GeV
+        //     if(transverse_momentum > 1.0) {
+        //         h_mcpdg_ptcut->Fill(pdgid);
+        //     }
+        // } // loop over iparticle
     } // loop over ievent
 
     // draw the histograms
@@ -133,33 +141,40 @@ int main(int argc, char* argv[]) {
     c_vtxxx->SetLogy(do_logy);
     c_vtxxx->SaveAs("h_vtxxx_none.png");
 
-    c_vtyyy->cd();
-    c_vtyyy->SetLogy(do_logy);
-    h_vtyyy->Draw("hist");
-    h_vtyyy->SetLineColor(kBlack);
-    h_vtyyy->SetLineWidth(2);
-    c_vtyyy->SaveAs("h_vtyyy_none.png");
+    // c_mcvtx->cd();
+    // h_mcvtx->Draw("hist");
+    // h_mcvtx->SetLineColor(kBlack);
+    // h_mcvtx->SetLineWidth(2);
+    // c_mcvtx->SetLogy(do_logy);
+    // c_mcvtx->SaveAs("h_mcvtx_none.png");
 
-    c_vtzzz->cd();
-    c_vtzzz->SetLogy(do_logy);
-    h_vtzzz->Draw("hist");
-    h_vtzzz->SetLineColor(kBlack);
-    h_vtzzz->SetLineWidth(2);
-    c_vtzzz->SaveAs("h_vtzzz_none.png");
+    // c_vtyyy->cd();
+    // c_vtyyy->SetLogy(do_logy);
+    // h_vtyyy->Draw("hist");
+    // h_vtyyy->SetLineColor(kBlack);
+    // h_vtyyy->SetLineWidth(2);
+    // c_vtyyy->SaveAs("h_vtyyy_none.png");
 
-    c_mcpdg->cd();
-    c_mcpdg->SetLogy(do_logy);
-    h_mcpdg->Draw("hist");
-    h_mcpdg->SetLineColor(kBlack);
-    h_mcpdg->SetLineWidth(2);
-    c_mcpdg->SaveAs("h_mcpdg_none.png");
+    // c_vtzzz->cd();
+    // c_vtzzz->SetLogy(do_logy);
+    // h_vtzzz->Draw("hist");
+    // h_vtzzz->SetLineColor(kBlack);
+    // h_vtzzz->SetLineWidth(2);
+    // c_vtzzz->SaveAs("h_vtzzz_none.png");
 
-    c_mcpdg_ptcut->cd();
-    c_mcpdg_ptcut->SetLogy(do_logy);
-    h_mcpdg_ptcut->Draw("hist");
-    h_mcpdg_ptcut->SetLineColor(kBlack);
-    h_mcpdg_ptcut->SetLineWidth(2);
-    c_mcpdg_ptcut->SaveAs("h_mcpdg_ptcut.png");
+    // c_mcpdg->cd();
+    // c_mcpdg->SetLogy(do_logy);
+    // h_mcpdg->Draw("hist");
+    // h_mcpdg->SetLineColor(kBlack);
+    // h_mcpdg->SetLineWidth(2);
+    // c_mcpdg->SaveAs("h_mcpdg_none.png");
+
+    // c_mcpdg_ptcut->cd();
+    // c_mcpdg_ptcut->SetLogy(do_logy);
+    // h_mcpdg_ptcut->Draw("hist");
+    // h_mcpdg_ptcut->SetLineColor(kBlack);
+    // h_mcpdg_ptcut->SetLineWidth(2);
+    // c_mcpdg_ptcut->SaveAs("h_mcpdg_ptcut.png");
 
 
     // cleanup
