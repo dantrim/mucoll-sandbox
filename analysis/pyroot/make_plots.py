@@ -3,6 +3,12 @@
 ###########################################
 #
 # Simple PyROOT-based histogramming
+# 
+# Basic usage:
+#  $ python make_plots.py -i myFile.root
+#
+# Full list of available options:
+#  $ python make_plots.py --help
 #
 ###########################################
 
@@ -48,10 +54,16 @@ def get_selections() :
 
     return cut_dict
 
-def make_plot(tree, variable_name, selection_name, histogram_config, do_logy = False) :
+def make_plot(tree, variable_name, selection_name, do_logy = False) :
 
     ##
-    ## first create the TCanvas onto which we'll draw the histogram
+    ## get the configuration for this plot
+    ##
+    histogram_config = get_variables()[variable_name]
+    selection_string = get_selections()[selection_name]
+
+    ##
+    ## create the TCanvas onto which we'll draw the histogram
     ##
     canvas_name = f"c_{variable_name}"
     if VERBOSE :
@@ -92,7 +104,7 @@ def make_plot(tree, variable_name, selection_name, histogram_config, do_logy = F
     ## TCut string will be used in the TTree::Draw command as follows:
     ##    MyLCTuple->Draw("mcpdg>>h_foo", "sqrt(mcmox*mcmox + mcmoy*mcmoy) > 1.0")
     ##
-    tcut_string = get_selections()[selection_name]
+    tcut_string = selection_string
     if VERBOSE :
         print(f"\t\ttcut_string: {tcut_string}")
 
@@ -139,9 +151,8 @@ def make_plots(tree, variable_name = "all", selection_name = "none", do_logy = F
     n_variables = len(variables)
 
     for ivariable, variable_name in enumerate(variables) :
-        histogram_config = variables_dict[variable_name]
         print(f"  [{ivariable+1:>2}/{n_variables:>2}] Plotting {variable_name}")
-        make_plot(tree, variable_name, selection_name, histogram_config, do_logy)
+        make_plot(tree, variable_name, selection_name, do_logy)
         if VERBOSE :
             print(80 * '-')
 
