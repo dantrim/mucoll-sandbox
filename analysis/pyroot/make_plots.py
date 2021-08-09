@@ -120,6 +120,9 @@ def make_plot(tree, variable_name, selection_name, do_logy = False) :
 
     # grab the built histogram from ROOT by asking for it by name
     hist = ROOT.gROOT.FindObject(histogram_name)
+    if hist is None :
+        print(f"ERROR: Failed to find histogram named \"{histogram_name}\"")
+        sys.exit(1)
 
     # set some aesthetics (colors, line widths, etc)
     hist.SetLineColor(ROOT.kBlack)
