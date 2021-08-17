@@ -16,7 +16,7 @@ from argparse import ArgumentParser
 from pathlib import Path
 import os
 import sys
-
+import numpy
 import ROOT
 
 # constants/globals
@@ -36,7 +36,7 @@ def get_variables() :
             "mcvtx": {"n_bins": 50, "x_low": -5, "x_high": 5, "x_label": "MC x-position [#mum]", "y_label": "Entries/bin", "multiplier": 1e6},
             "vtyyy": {"n_bins": 50, "x_low": -5, "x_high": 5, "x_label": "Reco PV y-position [#mum]", "y_label": "Entries/bin", "multiplier": 1e6},
             "mcpdg": {"n_bins": 50, "x_low": -25, "x_high": 25, "x_label": "MC particle PDG Id", "y_label": "Entries/bin"},
-            "vtxxx - mcvtx": {"n_bins": 50, "x_low": -25, "x_high": 25, "x_label": "MC particle PDG Id", "y_label": "Entries/bin"}
+            "vtxxx - mcvtx": {"n_bins": 50, "x_low": -10, "x_high": 10, "x_label": "PV x residual", "y_label": "Entries/bin", "multiplier": 1e6}
     }
  
     return variable_dict
@@ -52,7 +52,8 @@ def get_selections() :
         "none": "",
         "true-muon": "abs(mcpdg)==13",
         "mc-pT-cut": "sqrt(mcmox*mcmox + mcmoy*mcmoy) > 1.0",
-        "muon": "(mcpdg)==13"
+        "muon": "(mcpdg)==13",
+        "true-muon-ptcut": "(mcpdg)=13 && (sqrt(mcmox*mcmox + mcmoy*mcmoy) > 1.0)"
     }
 
     return cut_dict
