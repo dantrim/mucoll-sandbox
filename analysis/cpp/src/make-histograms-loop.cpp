@@ -234,6 +234,28 @@ int main(int argc, char* argv[]) {
      c_pvxresidual->SetLogy(do_logy);
      c_pvxresidual->SaveAs("h_pvxresidual.png");
 
+    c_mcvtx_muon->cd();
+    h_mcvtx_muon->Draw("hist");
+    h_mcvtx_muon->SetLineColor(kBlack);
+    h_mcvtx_muon->SetLineWidth(2);
+    c_mcvtx_muon->SetLogy(do_logy);
+    c_mcvtx_muon->SaveAs("h_mcvtx_muon.png");
+
+    c_mc_muon_count->cd();
+    h_mc_muon_count->Draw("hist");
+    h_mc_muon_count->SetLineColor(kBlack);
+    h_mc_muon_count->SetLineWidth(2);
+    c_mc_muon_count->SetLogy(do_logy);
+    c_mc_muon_count->SaveAs("h_mc_muon_count.png");
+    
+    c_mu_mcvtx_diff->cd();
+    h_mu_mcvtx_diff->Draw("hist");
+    h_mu_mcvtx_diff->SetLineColor(kBlack);
+    h_mu_mcvtx_diff->SetLineWidth(2);
+    c_mu_mcvtx_diff->SetLogy(do_logy);
+    c_mu_mcvtx_diff->SaveAs("h_mu_mcvtx_diff.png");
+    
+
     // c_mcvtx->cd();
     // h_mcvtx->Draw("hist");
     // h_mcvtx->SetLineColor(kBlack);
