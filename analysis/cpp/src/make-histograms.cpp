@@ -35,7 +35,6 @@ std::map<std::string, HistoConfig> plot_vars {
     {"vtzzz", {"PV z-position [mm]", "Entries/bin", 0.5, -12, 12, 1.0e3}},
     {"mcpdg", {"MC particle PDG id.", "Entries/bin", 1.0, -30, 30, 1.0}},
     {"mcvtx", {"MC x-position [#mum]", "Entries/bin", 0.2, -5, 5, 1.0e6}},  //new
-    {"vtxxx-mcvtx", {"MC x-position [#mum]", "Entries/bin", 0.2, -5, 5, 1.0e6}}  //new
 };
 
 ////////////////////////////////////////////////////////
