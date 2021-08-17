@@ -105,10 +105,10 @@ int main(int argc, char* argv[]) {
     //tree->SetBranchAddress("mcmoy", mc_py);
 
     // instantiate the histograms that we want to make
-    std::unique_ptr<TH1F> h_vtxxx = std::make_unique<TH1F>("h_vtxxx", "Reco PV x-position;PV x-position [#mum];Entries/bin", 50, -5, 5);
+    std::unique_ptr<TH1F> h_vtxxx = std::make_unique<TH1F>("h_vtxxx", "Reco PV x-position;PV x-position ;Entries/bin", 50, -5, 5);
     std::unique_ptr<TCanvas> c_vtxxx = std::make_unique<TCanvas>("c_vtxxx");
 
-    std::unique_ptr<TH1F> h_mcvtx_muon = std::make_unique<TH1F>("h_mcvtx_muon", "Muon Truth-level Vertex x-position;Vertex x-position [#mum];Entries/bin", 50, -5, 5);
+    std::unique_ptr<TH1F> h_mcvtx_muon = std::make_unique<TH1F>("h_mcvtx_muon", "Muon Truth-level Vertex x-position;Vertex x-position;Entries/bin", 50, -5, 5);
     std::unique_ptr<TCanvas> c_mcvtx_muon = std::make_unique<TCanvas>("c_mcvtx_muon");
 
     std::unique_ptr<TH1F> h_mu_mcvtx_diff = std::make_unique<TH1F>("h_mu_mcvtx_diff", "Difference between Truth-level Muon and Anti-Muon Production Vertices;#Delta Vertex x-position [#mum];Entries/bin", 20, -0.2, 0.2);
@@ -117,7 +117,7 @@ int main(int argc, char* argv[]) {
     std::unique_ptr<TH1F> h_mc_muon_count = std::make_unique<TH1F>("h_mc_muon_count", "Number of MC (anti-)muons per event;Number of (anti-)muons;Entries/bin", 10, -5, 5);
     std::unique_ptr<TCanvas> c_mc_muon_count = std::make_unique<TCanvas>("c_mc_muon_count");
 
-    std::unique_ptr<TH1F> h_pvxresidual = std::make_unique<TH1F>("h_pvxresidual", "PV X Residual;Residual[#mum];Entries/bin", 50, -2.5, 2.5);
+    std::unique_ptr<TH1F> h_pvxresidual = std::make_unique<TH1F>("h_pvxresidual", "PV X Residual;Residual;Entries/bin", 50, -2.5, 2.5);
     std::unique_ptr<TCanvas> c_pvxresidual = std::make_unique<TCanvas>("c_pvxresidual");
     // std::unique_ptr<TH1F> h_vtyyy = std::make_unique<TH1F>("h_vtyyy", "Reco PV y-position;PV y-position [#mum];Entries/bin", 50, -5, 5);
     // std::unique_ptr<TCanvas> c_vtyyy = std::make_unique<TCanvas>("c_vtyyy");
@@ -187,7 +187,7 @@ int main(int argc, char* argv[]) {
          //h_mc_muon_count->Fill(n_muons_in_event);
          float delta_mu_vtx_x = mu_vtx_x_pos - antimu_vtx_x_pos;
          h_mu_mcvtx_diff->Fill(delta_mu_vtx_x);
-         pvxresidual = (pv_xpos - mu_vtx_x_pos)*1e7;
+         pvxresidual = (pv_xpos - mu_vtx_x_pos)*1e6;
 
          // std::cout << "event " << ievent << "  residual = " << pvxresidual << std::endl;
 
